@@ -43,28 +43,30 @@ def buildAndTrainTheModel(x, y):
 def createTheDate(m):
     N = 50
     x = torch.randn(N, 1)
-    y = m*x + torch.randn(N, 1) / 2
+    y = m * x + torch.randn(N, 1) / 2
     plt.plot(x, y, 's')
 
     return x, y
 
 
-# x, y = createTheDate(.8)
-#
-# yHat, losses = buildAndTrainTheModel(x, y)
-#
-# fig, ax = plt.subplots(1, 2, figsize=(12, 4))
-# ax[0].plot(losses.detach(), 'o', markerfacecolor='w', linewidth=0.1)
-# ax[0].set_xlabel('epoch')
-# ax[0].set_title('Loss')
-#
-# ax[1].plot(x, y, 'bo', label='real data')
-# ax[1].plot(x, yHat.detach(), 'rs', label='predictions')
-# ax[1].set_xlabel('x')
-# ax[1].set_label('y')
-# ax[1].set_title(f'predition-data corrr ={np.corrcoef(y.T, yHat.detach().T)[0, 1]:.2f}')
-# ax[1].legend()
-# plt.show()
+def testAnnModel():
+    x, y = createTheDate(.8)
+
+    yHat, losses = buildAndTrainTheModel(x, y)
+
+    fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+    ax[0].plot(losses.detach(), 'o', markerfacecolor='w', linewidth=0.1)
+    ax[0].set_xlabel('epoch')
+    ax[0].set_title('Loss')
+
+    ax[1].plot(x, y, 'bo', label='real data')
+    ax[1].plot(x, yHat.detach(), 'rs', label='predictions')
+    ax[1].set_xlabel('x')
+    ax[1].set_label('y')
+    ax[1].set_title(f'predition-data corrr ={np.corrcoef(y.T, yHat.detach().T)[0, 1]:.2f}')
+    ax[1].legend()
+    plt.show()
+
 
 slopes = np.linspace(-2, 2, 21)
 numExps = 50
